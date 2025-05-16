@@ -13,12 +13,25 @@ public class SinglyLinkedList implements ILinkedList{
     private Node tail;
 
     /**
-     * Return the size of the Linked List
+     * Return the size of the Linked List (Cohen)
      * @return an int representing the size
+     *
      */
     @Override
     public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        int length = 1;
+        Node temp = head;
+        if (head == null) {
+            return 0;
+        }
+        if (head == tail) {
+            return 1;
+        }
+        while (temp != tail) {
+            temp = temp.getNext();
+            length += 1;
+        }
+        return length;
     }
 
     /**
@@ -52,13 +65,25 @@ public class SinglyLinkedList implements ILinkedList{
     }
 
     /**
-     * Returns the first found index of the given item
+     * Returns the first found index of the given item (Cohen)
      * @param item The item to find
      * @return The index of the found item, or -1
      */
     @Override
     public int indexOf(Data item) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        int pos = 0;
+        Node temp = head;
+        if (head == null) {
+            return -1;
+        }
+        while (temp != null) {
+            if (temp.getItem() == item) {
+                return pos;
+            }
+            temp = temp.getNext();
+            pos += 1;
+        }
+        return -1;
     }
 
     /**
