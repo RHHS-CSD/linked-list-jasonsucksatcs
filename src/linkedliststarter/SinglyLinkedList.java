@@ -132,7 +132,33 @@ public class SinglyLinkedList implements ILinkedList{
         throw new UnsupportedOperationException("Not supported yet."); 
     }
     
-    public void swap() {
+    //Jason did this
+    Data first;
+    Data second;
+    public void swap(int m, int n) {
+        int i = 0;
+        Node current = head;
+        while (current != tail) {
+            current = current.getNext();
+            if (i == m) {
+                first =  current.getItem();
+            }
+            else if (i == n) {
+                second = current.getItem();
+            }
+            i++;
+        }
+        
+        while (current != tail) {
+            current = current.getNext();
+            if (i == m) {
+                current.setItem (second);
+            }
+            else if (i == n) {
+                current.setItem (first);
+            }
+            i++;
+        }
         
     }
     
