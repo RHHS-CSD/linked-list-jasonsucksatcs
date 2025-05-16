@@ -9,6 +9,7 @@ package linkedliststarter;
  * @author michael.roy-diclemen
  */
 public class SinglyLinkedList implements ILinkedList{
+    
     private Node head;
     private Node tail;
 
@@ -23,10 +24,12 @@ public class SinglyLinkedList implements ILinkedList{
 
     /**
      * Reset / Empty the LinkedList
+     * Jason did this method
      */
     @Override
     public void clear() {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        head = null;
+        tail = null;
     }
 
     /**
@@ -34,10 +37,22 @@ public class SinglyLinkedList implements ILinkedList{
      * @param item The item to be removed
      * @return true: if the item was found and removed
      *         false otherwise
+     * Jason did this method 
      */
     @Override
     public boolean remove(Data item) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Node n = head;
+        Node next = null;
+        while (n != tail) {
+            next = n.getNext();
+            if (next.getItem() == item) {
+                n.setNext(next.getNext());
+                next.setNext(null);
+                return true;
+            }
+            n = n.getNext();
+        }
+        return false;
     }
 
     /**
@@ -45,10 +60,24 @@ public class SinglyLinkedList implements ILinkedList{
      * @param index The index of the item to remove
      * @return true: if the item was found and removed
      *         false otherwise
+     * Jason did this method 
      */
-    @Override
+
     public boolean remove(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        int i = 0;
+        Node n = head;
+        Node next = null;
+        while (n != tail) {
+            next = n.getNext();
+            if (i == index) {
+                n.setNext(next.getNext());
+                next.setNext(null);
+                return true;
+            }
+            i++;
+            n = n.getNext();
+        }
+        return false;
     }
 
     /**
@@ -65,16 +94,27 @@ public class SinglyLinkedList implements ILinkedList{
      * Retrieves the Data at the given index
      * @param index The index to be retrieved
      * @return The data item, null if bad index
+     * Jason did this method 
      */
+    
     @Override
     public Data get(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        int i = 0;
+        Node n = head;
+        while (n != tail) {
+            n = n.getNext();
+            if (i == index) {
+                return n.getItem();
+            }
+            i++;
+        }
+        return null;
     }
 
     /**
      * Add the gen item to the end of the linked list
      * @param item Item to add
-     * @return true if successfuuly added, false otherwise
+     * @return true if successfully added, false otherwise
      */
     @Override
     public boolean add(String item) {
@@ -85,12 +125,18 @@ public class SinglyLinkedList implements ILinkedList{
      * Add the gen item to  the linked list at the given position
      * @param item Item to add
      * @param index The position to add the item
-     * @return true if successfuuly added, false otherwise
+     * @return true if successfully added, false otherwise
      */
     @Override
     public boolean add(String item, int index) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
     
+    public void swap() {
+        
+    }
     
+    public void join() {
+    
+    }
 }

@@ -6,7 +6,7 @@ package linkedliststarter;
 
 /**
  *
- * @author michael.roy-diclemen
+ * @author Jason Kang
  */
 
 public class Node {
@@ -33,5 +33,4 @@ public class Node {
     public Node getNext () {
         return next;
     }
-
 }
