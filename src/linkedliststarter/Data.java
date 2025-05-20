@@ -8,11 +8,13 @@ package linkedliststarter;
  *
  * @author michael.roy-diclemen
  */
-public class Data implements Comparable{
+public class Data implements Comparable<Data>{
+    
+    private String item;
     
     @Override
     public String toString(){
-        return null;
+        return item;
     }
     
     @Override
@@ -21,14 +23,11 @@ public class Data implements Comparable{
         if (! (o instanceof Data))
             return false;
         //add code to properly compare
-        
-        return true;
-        
+        return item.equals(((Data)o).item);
     }
 
     @Override
-    public int compareTo(Object o) {
-        
-        return 0;
+    public int compareTo(Data o){
+        return item.compareTo(((Data)o).item);
     }
 }

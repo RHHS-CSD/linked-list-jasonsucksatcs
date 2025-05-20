@@ -14,12 +14,25 @@ public class SinglyLinkedList implements ILinkedList{
     private Node tail;
 
     /**
-     * Return the size of the Linked List
+     * Return the size of the Linked List (Cohen)
      * @return an int representing the size
+     *
      */
     @Override
     public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        int length = 1;
+        Node temp = head;
+        if (head == null) {
+            return 0;
+        }
+        if (head == tail) {
+            return 1;
+        }
+        while (temp != tail) {
+            temp = temp.getNext();
+            length += 1;
+        }
+        return length;
     }
 
     /**
@@ -43,9 +56,20 @@ public class SinglyLinkedList implements ILinkedList{
     public boolean remove(Data item) {
         Node n = head;
         Node next = null;
+        if (head == null) {
+            return false;
+        }
+        if (n.getItem() == item) {
+            head = n.getNext();
+            n.setNext(null);
+            return true;
+        }
         while (n != tail) {
             next = n.getNext();
             if (next.getItem() == item) {
+                if (next == tail) {
+                    tail = n;
+                }
                 n.setNext(next.getNext());
                 next.setNext(null);
                 return true;
@@ -67,9 +91,20 @@ public class SinglyLinkedList implements ILinkedList{
         int i = 0;
         Node n = head;
         Node next = null;
+        if (head == null) {
+            return false;
+        }
+        if (index == 0) {
+            head = n.getNext();
+            n.setNext(null);
+            return true;
+        }
         while (n != tail) {
             next = n.getNext();
             if (i == index) {
+                if (next == tail) {
+                    tail = n;
+                }
                 n.setNext(next.getNext());
                 next.setNext(null);
                 return true;
@@ -81,13 +116,22 @@ public class SinglyLinkedList implements ILinkedList{
     }
 
     /**
-     * Returns the first found index of the given item
+     * Returns the first found index of the given item (Cohen)
      * @param item The item to find
      * @return The index of the found item, or -1
      */
     @Override
     public int indexOf(Data item) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        int pos = 0;
+        Node temp = head;
+        while (temp != null) {
+            if (temp.getItem() == item) {
+                return pos;
+            }
+            pos += 1;
+            temp = temp.getNext();
+        }
+        return -1;
     }
 
     /**
@@ -101,35 +145,72 @@ public class SinglyLinkedList implements ILinkedList{
     public Data get(int index) {
         int i = 0;
         Node n = head;
-        while (n != tail) {
-            n = n.getNext();
+        while (n != null) {
             if (i == index) {
                 return n.getItem();
             }
             i++;
+            n = n.getNext();
         }
         return null;
     }
 
     /**
-     * Add the gen item to the end of the linked list
+     * Add the gen item to the end of the linked list (Cohen)
      * @param item Item to add
      * @return true if successfully added, false otherwise
      */
     @Override
-    public boolean add(String item) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+    public boolean add(Data item) {
+        Node temp = head;
+        while (temp != null) {
+            if (temp == tail) {
+                temp.setNext(new Node(item));
+                tail = temp.getNext();
+                return true;
+            }
+            temp = temp.getNext();
+        }
+        head = new Node(item);
+        tail = head;
+        return true;
     }
 
     /**
-     * Add the gen item to  the linked list at the given position
+     * Add the gen item to  the linked list at the given position (Cohen)
      * @param item Item to add
      * @param index The position to add the item
      * @return true if successfully added, false otherwise
      */
     @Override
-    public boolean add(String item, int index) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+    public boolean add(Data item, int index) {
+        int pos = 1;
+        Node temp = head;
+        Node next = null;
+        if (head == null) {
+            head = new Node(item);
+            tail = head;
+            return true;
+        }
+        if (index == 0) {
+            head = new Node(item);
+            head.setNext(temp);
+            return true;
+        }
+        while (temp != null) {
+            next = temp.getNext();
+            if (pos == index) {
+                temp.setNext(new Node(item));
+                temp.getNext().setNext(next);
+                if (temp == tail) {
+                    tail = temp.getNext();
+                }
+                return true;
+            }
+            pos += 1;
+            temp = temp.getNext();
+        }
+        return false;
     }
     
     //Jason did this
@@ -162,7 +243,11 @@ public class SinglyLinkedList implements ILinkedList{
         
     }
     
-    public void join() {
-    
+    /**
+     * Concatenates another linked list to this one (Cohen)
+     * @param other the other linked list
+     */
+    public void join(SinglyLinkedList other) {
+        tail.setNext(other.head);
     }
 }
