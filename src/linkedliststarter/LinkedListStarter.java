@@ -21,31 +21,28 @@ public class LinkedListStarter {
         String teacher = "Mr.RD";
         int period = 4;
         Data d = new Data(code, teacher, period);
-        sli1.add(d);
+        sli1.add(d,0);
         code = "YXM4UE";
         teacher = "Mr.PW";
         period = 2;
         d = new Data(code, teacher, period);
-        sli1.add(d);
+        sli1.add(d,0);
         code = "DPQ1UE";
         teacher = "Mr.HF";
         period = 1;
         d = new Data(code, teacher, period);
-        sli1.add(d);
+        sli1.add(d,0);
         code = "WHC1UE";
         teacher = "Mr.MV";
         period = 3;
         d = new Data(code, teacher, period);
-        sli2.add(d);
+        sli1.add(d,2);
         code = "LLC1UE";
         teacher = "Mr.AL";
         period = 5;
         d = new Data(code, teacher, period);
-        sli2.add(d);
-        sli1.join(sli2);
-        sli1.swap(2, 0);
-        sli1.swap(2, 3);
-        System.out.println(sli1);
+        sli1.add(d,4);
+        System.out.println(sli1.size());
     }
     
 }

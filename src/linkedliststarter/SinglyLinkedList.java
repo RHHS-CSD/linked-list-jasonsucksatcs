@@ -25,9 +25,6 @@ public class SinglyLinkedList implements ILinkedList{
         if (head == null) {
             return 0;
         }
-        if (head == tail) {
-            return 1;
-        }
         while (temp != tail) {
             temp = temp.getNext();
             length += 1;
@@ -122,7 +119,7 @@ public class SinglyLinkedList implements ILinkedList{
         int pos = 0;
         Node temp = head;
         while (temp != null) {
-            if (temp.getItem() == item) {
+            if (temp.getItem().equals(item)) {
                 return pos;
             }
             pos += 1;
@@ -136,7 +133,6 @@ public class SinglyLinkedList implements ILinkedList{
      * @param index The index to be retrieved
      * @return The data item, null if bad index
      */
-    
     @Override
     public Data get(int index) {
         int i = 0;
@@ -183,13 +179,12 @@ public class SinglyLinkedList implements ILinkedList{
         int pos = 1;
         Node temp = head;
         Node next = null;
-        if (head == null) {
-            head = new Node(item);
-            tail = head;
-            return true;
-        }
         if (index == 0) {
             head = new Node(item);
+            if (head == null) {
+                tail = head;
+                return true;
+            }
             head.setNext(temp);
             return true;
         }
@@ -218,14 +213,15 @@ public class SinglyLinkedList implements ILinkedList{
     public boolean swap(int m, int n) {
         int i = 0;
         Node current = head;
-        Data first = null;
-        Data second = null;
+        Node temp = new Node(null);
+        Node first = null;
+        Node second = null;
         while (current != tail) {
             if (i == m) {
-                first = current.getItem();
+                first = current;
             }
             else if (i == n) {
-                second = current.getItem();
+                second = current;
             }
             i++;
             current = current.getNext();
@@ -233,18 +229,9 @@ public class SinglyLinkedList implements ILinkedList{
         if (first == null || second == null) {
             return false;
         }
-        i = 0;
-        current = head;
-        while (current != tail) {
-            if (i == m) {
-                current.setItem(second);
-            }
-            else if (i == n) {
-                current.setItem(first);
-            }
-            i++;
-            current = current.getNext();
-        }
+        temp.setItem(first.getItem());
+        first.setItem(second.getItem());
+        second.setItem(temp.getItem());
         return true;
     }
     
