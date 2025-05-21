@@ -209,40 +209,43 @@ public class SinglyLinkedList implements ILinkedList{
         return false;
     }
     
-    
-    Data first;
-    Data second;
     /**
      * Given two parameters m and n, swap the element at index m with the element at index n (Jason)
      * @param m the index of the first element to be swapped
      * @param n the index of the second element to be swapped  
      * Method doesn't return anything 
      */
-    public void swap(int m, int n) {
+    public boolean swap(int m, int n) {
         int i = 0;
         Node current = head;
+        Data first = null;
+        Data second = null;
         while (current != tail) {
-            current = current.getNext();
             if (i == m) {
-                first =  current.getItem();
+                first = current.getItem();
             }
             else if (i == n) {
                 second = current.getItem();
             }
             i++;
+            current = current.getNext();
+        }
+        if (first == null || second == null) {
+            return false;
         }
         i = 0;
-        Node cur = head;
-        while (cur != tail) {
-            cur = cur.getNext();
+        current = head;
+        while (current != tail) {
             if (i == m) {
-                cur.setItem (second);
+                current.setItem(second);
             }
             else if (i == n) {
-                cur.setItem (first);
+                current.setItem(first);
             }
             i++;
+            current = current.getNext();
         }
+        return true;
     }
     
     /**
@@ -250,6 +253,35 @@ public class SinglyLinkedList implements ILinkedList{
      * @param other the other linked list
      */
     public void join(SinglyLinkedList other) {
-        tail.setNext(other.head);
+        if (other != null) {
+            tail.setNext(other.head);
+            if (head == null) {
+                head = tail;
+            }
+            Node temp = head;
+            while (temp != null) {
+                if (temp.getNext() == null) {
+                    tail = temp;
+                }
+                temp = temp.getNext();
+            }
+        }
     }
+    
+    /**
+     * creates a String representation of the list
+     * @return the String
+     */
+    @Override
+    public String toString() {
+        String string = "";
+        Node temp = head;
+        while (temp != null) {
+            string += temp.getItem().toString();
+            string += "\n";
+            temp = temp.getNext();
+        }
+        return string;
+    }
+    
 }

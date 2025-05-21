@@ -14,7 +14,7 @@ public class Data implements Comparable<Data>{
     private String teacher;
     private int period;
     
-    public void Data (String c, String t, int p) {
+    public Data (String c, String t, int p) {
         this.code = c;
         this.teacher = t;
         this.period = p;
@@ -22,7 +22,7 @@ public class Data implements Comparable<Data>{
     
     @Override
     public String toString(){
-        return code + teacher + period;
+        return "["+code+", "+teacher+", "+period+"]";
     }
     
     public String getCode() {
