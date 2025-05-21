@@ -10,24 +10,57 @@ package linkedliststarter;
  */
 public class Data implements Comparable<Data>{
     
-    private String item;
+    private String code;
+    private String teacher;
+    private int period;
     
-    @Override
-    public String toString(){
-        return item;
+    public void Data (String c, String t, int p) {
+        this.code = c;
+        this.teacher = t;
+        this.period = p;
     }
     
     @Override
+    public String toString(){
+        return code + teacher + period;
+    }
+    
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(String teacher) {
+        this.teacher = teacher;
+    }
+
+    public int getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(int period) {
+        this.period = period;
+    }
+
+    @Override
     public boolean equals(Object o){
-        //anything not of type Data is false
-        if (! (o instanceof Data))
+        if (o instanceof Data && code.equals(((Data)o).getCode()) && teacher.equals(((Data)o).getTeacher()) && period == (((Data)o).getPeriod())) {
+            return true;
+        }
+        else {
             return false;
-        //add code to properly compare
-        return item.equals(((Data)o).item);
+        } 
     }
 
     @Override
     public int compareTo(Data o){
-        return item.compareTo(((Data)o).item);
+        return (this.period - o.period);
     }
 }

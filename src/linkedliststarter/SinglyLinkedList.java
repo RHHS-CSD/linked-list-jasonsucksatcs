@@ -36,8 +36,7 @@ public class SinglyLinkedList implements ILinkedList{
     }
 
     /**
-     * Reset / Empty the LinkedList
-     * Jason did this method
+     * Reset / Empty the LinkedList (Jason)
      */
     @Override
     public void clear() {
@@ -46,11 +45,10 @@ public class SinglyLinkedList implements ILinkedList{
     }
 
     /**
-     * Remove the first instance of item from the linked list
+     * Remove the first instance of item from the linked list (Jason)
      * @param item The item to be removed
      * @return true: if the item was found and removed
      *         false otherwise
-     * Jason did this method 
      */
     @Override
     public boolean remove(Data item) {
@@ -80,11 +78,10 @@ public class SinglyLinkedList implements ILinkedList{
     }
 
     /**
-     * Remove the item from the particular index
+     * Remove the item from the particular index (Jason)
      * @param index The index of the item to remove
      * @return true: if the item was found and removed
      *         false otherwise
-     * Jason did this method 
      */
 
     public boolean remove(int index) {
@@ -135,10 +132,9 @@ public class SinglyLinkedList implements ILinkedList{
     }
 
     /**
-     * Retrieves the Data at the given index
+     * Retrieves the Data at the given index (Jason)
      * @param index The index to be retrieved
      * @return The data item, null if bad index
-     * Jason did this method 
      */
     
     @Override
@@ -177,7 +173,7 @@ public class SinglyLinkedList implements ILinkedList{
     }
 
     /**
-     * Add the gen item to  the linked list at the given position (Cohen)
+     * Add the item to the linked list at the given position (Cohen)
      * @param item Item to add
      * @param index The position to add the item
      * @return true if successfully added, false otherwise
@@ -213,9 +209,15 @@ public class SinglyLinkedList implements ILinkedList{
         return false;
     }
     
-    //Jason did this
+    
     Data first;
     Data second;
+    /**
+     * Given two parameters m and n, swap the element at index m with the element at index n (Jason)
+     * @param m the index of the first element to be swapped
+     * @param n the index of the second element to be swapped  
+     * Method doesn't return anything 
+     */
     public void swap(int m, int n) {
         int i = 0;
         Node current = head;
@@ -229,18 +231,18 @@ public class SinglyLinkedList implements ILinkedList{
             }
             i++;
         }
-        
-        while (current != tail) {
-            current = current.getNext();
+        i = 0;
+        Node cur = head;
+        while (cur != tail) {
+            cur = cur.getNext();
             if (i == m) {
-                current.setItem (second);
+                cur.setItem (second);
             }
             else if (i == n) {
-                current.setItem (first);
+                cur.setItem (first);
             }
             i++;
         }
-        
     }
     
     /**

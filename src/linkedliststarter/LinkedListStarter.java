@@ -16,6 +16,10 @@ public class LinkedListStarter {
     public static void main(String[] args) {
         // This is a shared space for you to do some testing  It will also likely be the source of lots of conflicts if you're not careful.
         SinglyLinkedList sli1 = new SinglyLinkedList();
+        String code = "ICS4U1";
+        String teacher = "Mr.RD";
+        int period = 4;
+        sli1.add (code, teacher, period);
     }
     
 }
