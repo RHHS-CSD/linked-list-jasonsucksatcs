@@ -44,5 +44,4 @@ public class LinkedListStarter {
         sli1.add(d,4);
         System.out.println(sli1);
     }
-    
 }
