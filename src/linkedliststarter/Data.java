@@ -54,9 +54,7 @@ public class Data implements Comparable<Data>{
         if (o instanceof Data && code.equals(((Data)o).getCode()) && teacher.equals(((Data)o).getTeacher()) && period == (((Data)o).getPeriod())) {
             return true;
         }
-        else {
-            return false;
-        } 
+        return false;
     }
 
     @Override

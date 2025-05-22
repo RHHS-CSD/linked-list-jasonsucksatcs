@@ -20,11 +20,14 @@ public class SinglyLinkedList implements ILinkedList{
      */
     @Override
     public int size() {
+        //variables
         int length = 1;
         Node temp = head;
+        //size is 0 when the list is empty
         if (head == null) {
             return 0;
         }
+        //iterate through every element to determine the size of the list
         while (temp != tail) {
             temp = temp.getNext();
             length += 1;
@@ -49,19 +52,23 @@ public class SinglyLinkedList implements ILinkedList{
      */
     @Override
     public boolean remove(Data item) {
+        //variables
         Node n = head;
         Node next = null;
+        //cannot remove anything from an empty list
         if (head == null) {
             return false;
         }
-        if (n.getItem() == item) {
+        //special case for removing first element
+        if (n.getItem().equals(item)) {
             head = n.getNext();
             n.setNext(null);
             return true;
         }
+        //search through the entire list for the element to be removed
         while (n != tail) {
             next = n.getNext();
-            if (next.getItem() == item) {
+            if (next.getItem().equals(item)) {
                 if (next == tail) {
                     tail = n;
                 }
@@ -71,6 +78,7 @@ public class SinglyLinkedList implements ILinkedList{
             }
             n = n.getNext();
         }
+        //if the item cannot be found, return false
         return false;
     }
 
@@ -80,19 +88,23 @@ public class SinglyLinkedList implements ILinkedList{
      * @return true: if the item was found and removed
      *         false otherwise
      */
-
+    @Override
     public boolean remove(int index) {
-        int i = 0;
+        //variables
+        int i = 1;
         Node n = head;
         Node next = null;
+        //cannot remove anything from an empty list
         if (head == null) {
             return false;
         }
+        //special case for removing first element
         if (index == 0) {
             head = n.getNext();
             n.setNext(null);
             return true;
         }
+        //search through the entire list for the index to be removed
         while (n != tail) {
             next = n.getNext();
             if (i == index) {
@@ -106,18 +118,21 @@ public class SinglyLinkedList implements ILinkedList{
             i++;
             n = n.getNext();
         }
+        //if the item cannot be found, return false
         return false;
     }
 
     /**
      * Returns the first found index of the given item (Cohen)
      * @param item The item to find
-     * @return The index of the found item, or -1
+     * @return The index of the found item, or -1 if the item does not exist
      */
     @Override
     public int indexOf(Data item) {
+        //varaibles
         int pos = 0;
         Node temp = head;
+        //keep searching until the item is found
         while (temp != null) {
             if (temp.getItem().equals(item)) {
                 return pos;
@@ -125,6 +140,7 @@ public class SinglyLinkedList implements ILinkedList{
             pos += 1;
             temp = temp.getNext();
         }
+        //if the item is not found
         return -1;
     }
 
@@ -135,8 +151,10 @@ public class SinglyLinkedList implements ILinkedList{
      */
     @Override
     public Data get(int index) {
+        //variables
         int i = 0;
         Node n = head;
+        //searches for the index of the item
         while (n != null) {
             if (i == index) {
                 return n.getItem();
@@ -144,6 +162,7 @@ public class SinglyLinkedList implements ILinkedList{
             i++;
             n = n.getNext();
         }
+        //if the item could not be found
         return null;
     }
 
@@ -151,10 +170,13 @@ public class SinglyLinkedList implements ILinkedList{
      * Add the gen item to the end of the linked list (Cohen)
      * @param item Item to add
      * @return true if successfully added, false otherwise
+     * (FYI it never returns false, will always work)
      */
     @Override
     public boolean add(Data item) {
+        //variable temporary
         Node temp = head;
+        //find the end of the list, add the item there
         while (temp != null) {
             if (temp == tail) {
                 temp.setNext(new Node(item));
@@ -163,6 +185,7 @@ public class SinglyLinkedList implements ILinkedList{
             }
             temp = temp.getNext();
         }
+        //if the list is empty, initialize head and tail pointers (special case)
         head = new Node(item);
         tail = head;
         return true;
@@ -176,18 +199,22 @@ public class SinglyLinkedList implements ILinkedList{
      */
     @Override
     public boolean add(Data item, int index) {
+        //variables
         int pos = 1;
         Node temp = head;
         Node next = null;
+        //special case for adding to start of list
         if (index == 0) {
             head = new Node(item);
-            if (head == null) {
+            //special case if empty list
+            if (tail == null) {
                 tail = head;
                 return true;
             }
             head.setNext(temp);
             return true;
         }
+        //adding to any other position (loop through elements)
         while (temp != null) {
             next = temp.getNext();
             if (pos == index) {
@@ -201,6 +228,7 @@ public class SinglyLinkedList implements ILinkedList{
             pos += 1;
             temp = temp.getNext();
         }
+        //index out of bounds
         return false;
     }
     
@@ -208,14 +236,16 @@ public class SinglyLinkedList implements ILinkedList{
      * Given two parameters m and n, swap the element at index m with the element at index n (Jason)
      * @param m the index of the first element to be swapped
      * @param n the index of the second element to be swapped  
-     * Method doesn't return anything 
+     * @return if the swap was successful, false if the index is out of bounds
      */
     public boolean swap(int m, int n) {
+        //variables
         int i = 0;
         Node current = head;
         Node temp = new Node(null);
         Node first = null;
         Node second = null;
+        //find the first and second elements
         while (current != tail) {
             if (i == m) {
                 first = current;
@@ -226,9 +256,11 @@ public class SinglyLinkedList implements ILinkedList{
             i++;
             current = current.getNext();
         }
+        //if any of the elements do not exist, return false
         if (first == null || second == null) {
             return false;
         }
+        //switch places
         temp.setItem(first.getItem());
         first.setItem(second.getItem());
         second.setItem(temp.getItem());
@@ -240,11 +272,15 @@ public class SinglyLinkedList implements ILinkedList{
      * @param other the other linked list
      */
     public void join(SinglyLinkedList other) {
+        //does not do anything if the other list is null
         if (other != null) {
+            //combines the lists
             tail.setNext(other.head);
+            //if the list was empty (special case)
             if (head == null) {
                 head = tail;
             }
+            //set the new position of the tail
             Node temp = head;
             while (temp != null) {
                 if (temp.getNext() == null) {
@@ -261,8 +297,10 @@ public class SinglyLinkedList implements ILinkedList{
      */
     @Override
     public String toString() {
+        //variables
         String string = "";
         Node temp = head;
+        //add all elements to the string
         while (temp != null) {
             string += temp.getItem().toString();
             string += "\n";

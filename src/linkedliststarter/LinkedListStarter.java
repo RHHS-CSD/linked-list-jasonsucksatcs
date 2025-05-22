@@ -42,7 +42,7 @@ public class LinkedListStarter {
         period = 5;
         d = new Data(code, teacher, period);
         sli1.add(d,4);
-        System.out.println(sli1.size());
+        System.out.println(sli1);
     }
     
 }
